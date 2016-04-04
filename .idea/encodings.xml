@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/www/dom/index.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/gr.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/index.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/tool/edit_account.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/tool/index.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/tool/logout.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/tool/memberlist.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/tool/register.php" charset="UTF-8" />
   </component>
 </project>
