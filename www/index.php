@@ -81,7 +81,7 @@
 
 </script>
 <!script type="text/javascript">window.onload = st();<!/script>
-<button onclick="add()">add</button>
+<button onclick="add()" style="background-color: darkgray">add</button>
 
 </body>
 </html>
