@@ -1,0 +1,93 @@
+#num{
+    background: #6fb679;
+    font-style: oblique;
+    font-weight: bold;
+    color: white;
+    width: 6%;
+    background-image: url("fav.png");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#subj{
+    width: 48%;
+}
+#cost{
+    width: 10%;
+    font-weight: bold;
+}
+#but{
+ text-align: right;
+
+}
+#razd{
+    border-left: dashed;
+    border-color: rgba(248,248,248,.9);
+}
+.list{
+    float: left;
+    height: 50px;
+    text-align:center;
+//* margin: 5px 0px 5px 10px;
+       padding: 10px;
+       width: 50px;*//
+}
+.inner{
+    float: left;
+    height: 50px;
+    padding-left: 5px;
+    text-align: left;
+//* margin: 5px 10px 5px 0;
+        width: 200px;*//
+}
+.clear {
+    clear: left; /* Отмена обтекания */
+}
+.sh{
+    background: rgb(172, 226, 255);
+    border: 1px solid rgba(0,0,0,.1);
+    float: left;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    width: 99%;
+    box-shadow: 0 0 20px rgba(0,0,0,.3);
+    font: 13px/1.55 'Open Sans', Helvetica, Arial, sans-serif;
+    color: #666;
+}
+.sh-f{
+    background: rgb(172, 226, 255);
+    border: 3px solid rgba(82, 82, 82, 0.75);
+    float: left;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    width: 99%;
+    box-shadow: 0 0 20px rgba(0,10,0,.3);
+    font: 13px/1.55 'Open Sans', Helvetica, Arial, sans-serif;
+    color: #666;
+}
+.menu{
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    width: 20%;
+    float: left;
+}
+.sh p{
+    display: inline-block;
+    vertical-align: middle;
+}
+.head{
+    background: rgb(240, 255, 240);
+    height: 10%;
+    background-image: url("logo.png");
+    background-position: left;
+    background-repeat: no-repeat;
+    font: 20px/1.55 'Open Sans', Helvetica, Arial, sans-serif;
+    color: #0d560d;
+}
+.sub-head{
+    background: rgb(240, 255, 240);
+    height: 8%;
+    font: 20px/1.55 'Roboto', Helvetica, Arial, sans-serif;
+    color: #0d560d;
+}
+.head p{position: relative; top: 30%; left: 20%;}
+.main{width: 79.5%; float: left;}
+.bd{background: rgb(240, 255, 240);}

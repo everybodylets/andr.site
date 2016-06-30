@@ -8,10 +8,10 @@ for($r=0;$r<count($lis1); $r++) {
     $url = "http://www.prostobank.ua".$lis1[$r];
     //"http://www.prostobank.ua/spravochniki/banki/(name)/avtokrazbank";
     $ch = curl_init();
-    $timeout = 5;
+    $timeout = 55;
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+//    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
     $html = curl_exec($ch);
     curl_close($ch);
 
@@ -26,16 +26,16 @@ for($r=0;$r<count($lis1); $r++) {
     $results = $xpath->query("//div[@class='" . $classname . "']/text()|//div[@class='" . $classname . "']/p");
     $name = $xpathname->query("//*[@class='" . $classname2 . "']/h1|//*[@class='warning']/text()");
 
-    echo $name->item(0)->nodeValue; // Íàçâàíèå áàíêà
+    echo $name->item(0)->nodeValue; // ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð±Ð°Ð½ÐºÐ°
     echo " - ";
-    echo $name->item(1)->nodeValue; // Áàíêðîò?
+    echo $name->item(1)->nodeValue; // Ð‘Ð°Ð½ÐºÑ€Ð¾Ñ‚?
     echo "<br />";
     echo "<br />";
 
     if ($results->length > 0) {
         for ($i = 1; $i <= $results->length; $i++) {
 
-            echo $review = $results->item($i)->nodeValue; // î áàíêå è àêöèîíåðû.
+            echo $review = $results->item($i)->nodeValue; // Ð¾ Ð±Ð°Ð½ÐºÐµ Ð¸ Ð°ÐºÑ†Ð¸Ð¾Ð½ÐµÑ€Ñ‹.
             echo "<br />";
             echo "<br />";
         }

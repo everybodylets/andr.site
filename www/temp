@@ -1,1 +1,23 @@
-r.set(r.text (450, 100, "node3"), r.ellipse(450, 100, 20, 20)),
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+                margin: 5px 5px 5px 10px;
+
+                    background: #ace2ff;
+
+
+        <fieldset>
+            <section>
+                <label class="label">Checkboxes</label>
+                <div class="row">
+                    <div class="col col-4">
+                        <label class="checkbox state-success"><input type="checkbox" name="checkbox"><i></i>Alexandra</label>
+                        <label class="checkbox state-success"><input type="checkbox" name="checkbox" checked><i></i>Alice</label>
+                    </div>
+                </div>
+                <div class="note note-success">Thanks for your selection.</div>
+            </section>
+        </fieldset>
+
+        #f0fff0;
+
+            //    $vall = $(this).parent().find('span[id=num]').val();

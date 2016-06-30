@@ -1,0 +1,12 @@
+    for ($ii = 0; $ii <= $results1->length; $ii++) {
+        $res = $results1->item(1)->textContent;
+        if($res == "Сторінка не знайдена"):
+            echo "All that shit!";
+
+        else:
+        echo $nom . ") - ";
+        echo $results1->item($ii)->textContent;
+        echo " | ";
+        echo "<br />";
+        endif;
+    }
