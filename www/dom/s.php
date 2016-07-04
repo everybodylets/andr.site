@@ -1,21 +1,25 @@
 <?php
-ini_set("max_execution_time", "600");
+ini_set("max_execution_time", "6000");
+require 'func.php';
+require 'base.php';
+$classstate = "condition-row";
+$classprice = "start-price-row";
+$classdate = "date-end-row";
+$classpay = "payment-row";
+$classname4 = "additional-nformation";
+
+$stm = $pdo->prepare('INSERT INTO main (title, stan, nomer, dataStart, dataEnd, dataEndZ, priceStart, priceGarant, priceStep, obl, oblMaino, dataPub, Category, Ucenka, Body, URLSetam)
+                                VALUES (:title, :stan, :nomer, :dataStart, :dataEnd, :dataEndZ, :priceStart, :priceGarant, :priceStep, :obl, :oblMaino, :dataPub, :Category, :Ucenka, :Body, :URLSetam)');
+for($ma=1132; $ma<160190; $ma++) {
 # Use the Curl extension to query Google and get back a page of results
 
-    $url1 = "setam.net.ua/auction/158848/";
-
-    $classname0 = "condition-row";
-    $classname1 = "start-price-row";
-    $classname2 = "date-end-row";
-    $classname3 = "payment-row";
-    $opisclass = "tab-content";
-    $classname4 = "additional-nformation";
+    $url1 = "setam.net.ua/auction/".$ma;
 
     $ch1 = curl_init();
     curl_setopt($ch1, CURLOPT_URL, $url1);
     curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch1, CURLOPT_SSL_VERIFYPEER, FALSE);
-    curl_setopt($ch1, CURLOPT_SSL_VERIFYHOST,  2);
+    curl_setopt($ch1, CURLOPT_SSL_VERIFYHOST, 2);
     curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, TRUE);
     $html1 = curl_exec($ch1);
     curl_close($ch1);
@@ -23,174 +27,97 @@ ini_set("max_execution_time", "600");
     $dom1 = new DOMDocument();
     @$dom1->loadHTML($html1);
     $xpath1 = new DOMXPath($dom1);
-    $results = $xpath1->query("//div[@class='". $classname0 ."']/span|//div[@class='" . $classname2 . "']/span|//div[@class='" . $classname1 . "']/span/span|//div[@class='" . $classname3 . "']/span|//div[@class='" . $opisclass . "']/div/p|//div[@class='" . $classname3 . "']/span");
-    $notfound = "Сторінка не знайдена";
-echo "Стан аукціону";       echo $results->item(0)->nodeValue;
-echo "<br />";
-echo "Номер лоту:";        echo $results->item(1)->nodeValue;
-echo "<br />";
-echo "Дата проведення аукціону:";        echo ddate($results->item(2)->nodeValue);
-echo "<br />";
-echo "Дата закінчення торгів:";        echo ddate($results->item(3)->nodeValue);
-echo "<br />";
-echo "Дата закінчення подання заявок:";        echo ddate($results->item(4)->nodeValue);
-echo "<br />";
-echo "Стартова ціна:";        echo $results->item(5)->nodeValue;
+    $chek = $xpath1->query("//h1");
+    $chek2 = $xpath1->query("//div[@class='panel-heading font-bold']/text()");
+    $notfound = "404";
+    $pomilka = "Помилка";
+    $err1 = trim($chek->item(0)->nodeValue);
+    $err2 = trim($chek2->item(0)->nodeValue);
+    if(($err1==$notfound) or ($err2==$pomilka)) {
+        echo $ma . " + error <br />";
+        continue;
+    }else
 
-echo "<br />";
-echo "Гарантійний внесок:";        echo $results->item(6)->nodeValue;
-echo "<br />";
-echo "Крок аукціону:";        echo $results->item(7)->nodeValue;
-echo "<br />";
-echo "Область:";        echo obl($results->item(8)->nodeValue);
-echo "<br />";
-echo "Місцезнаходження майна:";        echo $results->item(9)->nodeValue;
-echo "<br />";
-echo "Дата публікації:";        echo ddate($results->item(10)->nodeValue);
-echo "<br />";
-echo "<br />";
-echo "Описание:";        echo $results->item(11)->nodeValue; //empty
-echo "<br />";
-echo $results->item(12)->nodeValue; //opis
-echo "<br />";
-echo $results->item(13)->nodeValue; //opis
-echo "<br />";
-echo $results->item(14)->nodeValue; //opis
-echo "<br />";
-echo "_________________";
-echo "<br />";
+        $mtitle = $xpath1->query("//title");
 
 
-function ddate($stroka)
-{
-    $day = substr($stroka, 0, 2);
-    $month = substr($stroka, 3, -11);
-    switch (substr($stroka, 3, -11)) {
-        case "Січня":
-            $month = "01";
-            break;
-        case "Лютого":
-            $month = "02";
-            break;
-        case "Березня":
-            $month = "03";
-            break;
-        case "Квітня":
-            $month = "04";
-            break;
-        case "Травня":
-            $month = "05";
-            break;
-        case "Червня":
-            $month = "06";
-            break;
-        case "Липня":
-            $month = "07";
-            break;
-        case "Серпня":
-            $month = "08";
-            break;
-        case "Вересня":
-            $month = "09";
-            break;
-        case "Жовтня":
-            $month = "10";
-            break;
-        case "Листопада":
-            $month = "11";
-            break;
-        case "Грудня":
-            $month = "12";
-            break;
+        $results = $xpath1->query("//div[@class='" . $classstate . "']/span|
+                                //div[@class='" . $classdate . "']/span|
+                                //div[@class='" . $classprice . "']/span/span|
+                                //div[@class='" . $classpay . "']/span");
+        $results1 = $xpath1->query("//div[@id='" . $classname4 . "']/text()");
+        $results3 = $xpath1->query("//div[@id='" . $classname4 . "']/a/@href");
+        $resultsPay = $xpath1->query("//div[@class='" . $classpay . "']/span/span");
+        $resultsOpis = $xpath1->query("//div[@id='Feature-lot']/p");
+        $photo = $xpath1->query("//div[@class='fotorama']/img");
+        $stana = stan($results->item(0)->nodeValue);
+        if (!$stana){continue;}
+        $stm->bindParam(":stan", $stana);
+
+        $tittle = substr($mtitle->item(0)->nodeValue, 0, -15);
+        $stm->bindParam(":title", $tittle);
+
+        $nom = $results->item(1)->nodeValue;
+        $stm->bindParam(":nomer", $nom);
+        $datestart = ddate($results->item(2)->nodeValue);
+        $stm->bindParam(":dataStart", $datestart);
+        $datee = ddate($results->item(3)->nodeValue);
+        $stm->bindParam(":dataEnd", $datee);
+
+        $dateez = ddate($results->item(4)->nodeValue);
+        $stm->bindParam(":dataEndZ", $dateez);
+
+        $prst = str_replace(" ", "", $results->item(5)->nodeValue);
+        $stm->bindParam(":priceStart", $prst);
+
+        $prgar = str_replace(" ", "", $resultsPay->item(0)->nodeValue);
+        $stm->bindParam(":priceGarant", $prgar);
+
+        $prstep = str_replace(" ", "", $resultsPay->item(1)->nodeValue);
+        $stm->bindParam(":priceStep", $prstep);
+
+        $oobl = obl($results->item(8)->nodeValue);
+        $stm->bindParam(":obl", $oobl);
+
+        $oblma = $results->item(9)->nodeValue;
+        $stm->bindParam(":oblMaino", $oblma);
+
+        $datepub = ddate($results->item(10)->nodeValue);
+        $stm->bindParam(":dataPub", $datepub);
+
+        $ycen = $results3->item(0)->nodeValue;
+
+        if ($ycen) {
+
+
+            $stm->bindParam(":Ucenka", $ycen);
+            $categ = cat(trim($results1->item(3)->nodeValue));
+            $stm->bindParam(":Category", $categ);
+        } else
+            $ycen = "NO";
+
+        $stm->bindParam(":Ucenka", $ycen);
+        $categ = cat(trim($results1->item(2)->nodeValue));
+        $stm->bindParam(":Category", $categ);
+
+if($photo->length) {
+mkdir($nom, 0777);
+    for ($t = 0; $t < $photo->length; $t++) {
+        $url = 'http://setam.net.ua' . $photo->item($t)->getAttribute('src');
+        $local = $nom . '/file' . $t . '.jpg';
+        file_put_contents($local, file_get_contents($url));
     }
-    $year = substr($stroka, -10, 4);
-    $tti = substr($stroka, -5);
-    $dnow = strtotime($day . "." . $month . "." . $year . " " . $tti);
-    return date('d/m/Y H:i', $dnow);
 }
-function obl($oblname){
-    switch ($oblname) {
-    case "Автономна Республіка Крим":
-        $obl = "1";
-        break;
-    case "Вінницька обл.":
-        $obl = "2";
-        break;
-    case "Волинська обл.":
-        $obl = "3";
-        break;
-    case "Дніпропетровська обл.":
-        $obl = "4";
-        break;
-    case "Донецька обл.":
-        $obl = "5";
-        break;
-    case "Житомирська обл.":
-        $obl = "6";
-        break;
-    case "Закарпатська обл.":
-        $obl = "7";
-        break;
-    case "Запорізька обл.":
-        $obl = "8";
-        break;
-    case "Івано-Франківська обл.":
-        $obl = "9";
-        break;
-    case "Київська обл.":
-        $obl = "10";
-        break;
-    case "Кіровоградська обл.":
-        $obl = "11";
-        break;
-    case "Луганська обл.":
-        $obl = "12";
-        break;
-    case "Львівська обл.":
-        $obl = "13";
-        break;
-    case "Миколаївська обл.":
-        $obl = "14";
-        break;
-    case "Одеська обл.":
-        $obl = "15";
-        break;
-    case "Полтавська обл.":
-        $obl = "16";
-        break;
-    case "Рівненська обл.":
-        $obl = "17";
-        break;
-    case "Сумська обл.":
-        $obl = "18";
-        break;
-    case "Тернопільська обл.":
-        $obl = "19";
-        break;
-    case "Харківська обл.":
-        $obl = "20";
-        break;
-    case "Херсонська обл.":
-        $obl = "21";
-        break;
-    case "Хмельницька обл.":
-        $obl = "22";
-        break;
-    case "Черкаська обл.":
-        $obl = "23";
-        break;
-    case "Чернівецька обл.":
-        $obl = "24";
-        break;
-    case "Чернігівська обл.":
-        $obl = "25";
-        break;
-    case "м.Київ":
-            $obl = "26";
-            break;
-    }
-    return $obl;
-}
+        for ($o = 0; $o < $resultsOpis->length; $o++) {
 
+            $body .= trim($resultsOpis->item($o)->nodeValue) . "<br />";
+
+        }
+        $stm->bindParam(":Body", $body);
+        $stm->bindParam(":URLSetam", $url1);
+
+
+        $stm->execute();
+    }
 ?>
 
