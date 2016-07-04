@@ -23,6 +23,7 @@ for($ma=1132; $ma<160190; $ma++) {
     curl_setopt($ch1, CURLOPT_FOLLOWLOCATION, TRUE);
     $html1 = curl_exec($ch1);
     curl_close($ch1);
+
     $lis1 = array();
     $dom1 = new DOMDocument();
     @$dom1->loadHTML($html1);
