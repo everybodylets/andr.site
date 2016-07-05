@@ -1,9 +1,15 @@
 <?php
 function ddate($stroka)
 {
-    $day = substr($stroka, 0, 2);
-    $month = substr($stroka, 3, -11);
-    switch (substr($stroka, 3, -11)) {
+    if (ctype_space(substr($stroka,1,1))){
+        $day =  substr($stroka,0,1);
+        $monthT = substr($stroka, 2, -11);
+    }
+    else {
+        $day = substr($stroka, 0, 2);
+        $monthT = substr($stroka, 3, -11);
+    }
+    switch ($monthT) {
         case "Січня":
             $month = "01";
             break;
@@ -267,6 +273,8 @@ function cat($catex){
          case "Інше":
              $catb="8";
              break;
+         default:
+             $catb="8";
      }
 return $catb;
 }

@@ -133,7 +133,7 @@
     top: 14px;
     right: 14px;
     width: 5px;
-    height: 11px;
+    height: 22px;
     background: #fff;
     box-shadow: 0 0 0 12px #fff;
 }
@@ -154,7 +154,7 @@
     border-bottom: 4px solid #404040;
 }
 .sky-form .select-multiple select {
-    height: auto;
+    height: 55px;
 }
 
 

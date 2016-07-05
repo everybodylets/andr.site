@@ -1,42 +1,57 @@
-#num{
+
+
+#subj{
+    width: 38%;
+
+}
+#cost{
+    width: 20%;
+}
+#date{
+    width: 20%;
+}
+#photo{
+    width: 10%;
+
+}
+/*#but{*/
+ /*text-align: right;*/
+
+/*}*/
+
+/*#razd{*/
+    /*width: 5px;*/
+    /*text-align: left;*/
+    /*border-left: dashed;*/
+    /*border-color: rgba(248,248,248,.9);*/
+/*}*/
+
+.list{
     background: #6fb679;
     font-style: oblique;
     font-weight: bold;
-    color: white;
-    width: 6%;
-    background-image: url("fav.png");
-    background-position: center;
-    background-repeat: no-repeat;
-}
-#subj{
-    width: 48%;
-}
-#cost{
-    width: 10%;
-    font-weight: bold;
-}
-#but{
- text-align: right;
-
-}
-#razd{
-    border-left: dashed;
-    border-color: rgba(248,248,248,.9);
-}
-.list{
+    font-size: large;
+    color: #ffffff;
+    width: 8%;
     float: left;
-    height: 50px;
+
     text-align:center;
+    background-image: url("fav.png");
+    background-size: 50px,50px;
+    background-position: center, center;
+    background-repeat: no-repeat;
 //* margin: 5px 0px 5px 10px;
        padding: 10px;
        width: 50px;*//
 }
 .inner{
     float: left;
-    height: 50px;
+    height: 105px;
     padding-left: 5px;
-    text-align: left;
-//* margin: 5px 10px 5px 0;
+    border-left: dashed;
+    border-color: rgba(248,248,248,.9);
+//*    text-align: left;
+ margin: 5px 10px 5px 0;
         width: 200px;*//
 }
 .clear {
@@ -47,10 +62,10 @@
     border: 1px solid rgba(0,0,0,.1);
     float: left;
     margin-left: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     width: 99%;
     box-shadow: 0 0 20px rgba(0,0,0,.3);
-    font: 13px/1.55 'Open Sans', Helvetica, Arial, sans-serif;
+    font: 12px/1.55 'Open Sans', Helvetica, Arial, sans-serif;
     color: #666;
 }
 .sh-f{
@@ -58,7 +73,7 @@
     border: 3px solid rgba(82, 82, 82, 0.75);
     float: left;
     margin-left: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     width: 99%;
     box-shadow: 0 0 20px rgba(0,10,0,.3);
     font: 13px/1.55 'Open Sans', Helvetica, Arial, sans-serif;
@@ -71,7 +86,7 @@
 }
 .sh p{
     display: inline-block;
-    vertical-align: middle;
+    /*vertical-align: middle;*/
 }
 .head{
     background: rgb(240, 255, 240);
@@ -91,3 +106,18 @@
 .head p{position: relative; top: 30%; left: 20%;}
 .main{width: 79.5%; float: left;}
 .bd{background: rgb(240, 255, 240);}
+
+BODY
+A {
+    text-decoration: none;
+    color: #0d560d; /* Цвет ссылок */
+}
+A:visited {
+    color: #0d560d; /* Цвет посещенных ссылок */
+}
+A:active {
+    color: #0d560d; /* Цвет активных ссылок */
+}
+span{
+    font: 12px/1.55 'Open Sans', Helvetica, Arial, sans-serif;
+}

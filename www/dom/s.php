@@ -10,11 +10,11 @@ $classname4 = "additional-nformation";
 
 $stm = $pdo->prepare('INSERT INTO main (title, stan, nomer, dataStart, dataEnd, dataEndZ, priceStart, priceGarant, priceStep, obl, oblMaino, dataPub, Category, Ucenka, Body, URLSetam)
                                 VALUES (:title, :stan, :nomer, :dataStart, :dataEnd, :dataEndZ, :priceStart, :priceGarant, :priceStep, :obl, :oblMaino, :dataPub, :Category, :Ucenka, :Body, :URLSetam)');
-for($ma=1132; $ma<160190; $ma++) {
+for($ma=159000; $ma<160100; $ma++) {
+
 # Use the Curl extension to query Google and get back a page of results
 
     $url1 = "setam.net.ua/auction/".$ma;
-
     $ch1 = curl_init();
     curl_setopt($ch1, CURLOPT_URL, $url1);
     curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
@@ -94,31 +94,29 @@ for($ma=1132; $ma<160190; $ma++) {
             $stm->bindParam(":Ucenka", $ycen);
             $categ = cat(trim($results1->item(3)->nodeValue));
             $stm->bindParam(":Category", $categ);
-        } else
+        } else {
             $ycen = "NO";
+            $stm->bindParam(":Ucenka", $ycen);
+            $categ = cat(trim($results1->item(2)->nodeValue));
+            $stm->bindParam(":Category", $categ);
+        }
+    // Проверка на стан аукциона и на правильные категории.
+    if(($stana == "102" || $stana == "108")&&($categ=="9"||$categ=="10"||$categ=="11"||$categ=="12"||$categ=="13"||$categ=="14"||$categ=="15")) {
 
-        $stm->bindParam(":Ucenka", $ycen);
-        $categ = cat(trim($results1->item(2)->nodeValue));
-        $stm->bindParam(":Category", $categ);
-
-if($photo->length) {
-mkdir($nom, 0777);
+        if($photo->length) {
+    mkdir('files1/'.$nom, 0777);
     for ($t = 0; $t < $photo->length; $t++) {
         $url = 'http://setam.net.ua' . $photo->item($t)->getAttribute('src');
-        $local = $nom . '/file' . $t . '.jpg';
-        file_put_contents($local, file_get_contents($url));
+        $local = 'files1/'.$nom . '/file' . $t . '.jpg';
+        file_put_contents($local, file_get_contents($url));}
     }
-}
         for ($o = 0; $o < $resultsOpis->length; $o++) {
-
-            $body .= trim($resultsOpis->item($o)->nodeValue) . "<br />";
-
-        }
+            $body .= trim($resultsOpis->item($o)->nodeValue) . "<br />";}
         $stm->bindParam(":Body", $body);
         $stm->bindParam(":URLSetam", $url1);
 
-
-        $stm->execute();
+            $stm->execute();
+        }
     }
 ?>
 

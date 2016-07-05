@@ -7,9 +7,12 @@
     <file url="file://$PROJECT_DIR$/www/dom/base.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/dom/birga.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/dom/cat.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/dom/catf.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/dom/func.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/dom/index.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/dom/s.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/dom/temp.temp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/dom/test.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/find.css" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/index.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/www/jquery-latest.min.js" charset="UTF-8" />

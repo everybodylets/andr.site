@@ -1,6 +1,6 @@
     for ($ii = 0; $ii <= $results1->length; $ii++) {
         $res = $results1->item(1)->textContent;
-        if($res == "Сторінка не знайдена"):
+        if($res == "РЎС‚РѕСЂС–РЅРєР° РЅРµ Р·РЅР°Р№РґРµРЅР°"):
             echo "All that shit!";
 
         else:
@@ -14,18 +14,46 @@
     |
                                     //div[@class='" . $classpay . "']/span
 
-                                    Реєстрація учасників
-                                    Торги відбулися
-                                    Торги не відбулися
+                                    Р РµС”СЃС‚СЂР°С†С–СЏ СѓС‡Р°СЃРЅРёРєС–РІ
+                                    РўРѕСЂРіРё РІС–РґР±СѓР»РёСЃСЏ
+                                    РўРѕСЂРіРё РЅРµ РІС–РґР±СѓР»РёСЃСЏ
 
 
 
-Реєстрація учасників
-Торги
-Підписання протоколу
-Очікується оплата
-Складання акту
-Торги відбулися
-Торги не відбулися
-Торги зупинено
-Торги припинено
+Р РµС”СЃС‚СЂР°С†С–СЏ СѓС‡Р°СЃРЅРёРєС–РІ
+РўРѕСЂРіРё
+РџС–РґРїРёСЃР°РЅРЅСЏ РїСЂРѕС‚РѕРєРѕР»Сѓ
+РћС‡С–РєСѓС”С‚СЊСЃСЏ РѕРїР»Р°С‚Р°
+РЎРєР»Р°РґР°РЅРЅСЏ Р°РєС‚Сѓ
+РўРѕСЂРіРё РІС–РґР±СѓР»РёСЃСЏ
+РўРѕСЂРіРё РЅРµ РІС–РґР±СѓР»РёСЃСЏ
+РўРѕСЂРіРё Р·СѓРїРёРЅРµРЅРѕ
+РўРѕСЂРіРё РїСЂРёРїРёРЅРµРЅРѕ
+
+                    <span class="inner" id="but"><p><a id="inline" class="a_demo_three" href="#" onClick="displayFancybox(\''.$raw1['id'].'\', \''.$raw1['priceStart'].'\')">Р’С‹РєСѓРїРёС‚СЊ</a></p></span>
+
+
+</fieldset>
+        <fieldset>
+            <section>
+                <label class="label">Р’С‹Р±РѕСЂ</label>
+                <div class="row">
+                    <div class="col col-4">
+                        <label class="radio state-success"><input type="radio" name="radio"><i></i>Р”СЂСѓРіРѕРµ</label>
+                        <label class="radio state-success"><input type="radio" name="radio"><i></i>Р§С‚РѕС‚Рѕ</label>
+                    </div>
+                </div>
+                <div class="note note-success"></div>
+            </section>
+        </fieldset>
+        <fieldset>
+            <div class="row">
+                <section class="col col">
+                    <label class="label">РЎРѕСЃС‚РѕСЏРЅРёРµ С‚РѕСЂРіРѕРІ</label>
+                    <label class="toggle state-success"><input type="checkbox" name="checkbox-toggle" checked><i></i>РђРєС‚РёРІРЅС‹Рµ</label>
+                    <label class="toggle state-success"><input type="checkbox" name="checkbox-toggle"><i></i>Р—Р°РІРµСЂС€РµРЅРЅС‹Рµ</label>
+                    <label class="toggle state-success"><input type="checkbox" name="checkbox-toggle"><i></i>РќРµ РїСЂРѕРґР°РЅРЅС‹Рµ</label>
+                    <div class="note note-success"></div>
+                </section>
+            </div>
+        </fieldset>
