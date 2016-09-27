@@ -3,6 +3,14 @@
 /**/
 /* defaults */
 /**/
+.sky-form-padd {
+    margin: 0;
+    outline: none;
+    /*box-shadow: 0 0 20px rgba(0,0,0,.3);*/
+    font: 13px/1.55 'Open Sans', Helvetica, Arial, sans-serif;
+    color: #666;
+}
+
 .sky-form {
     margin: 0;
     outline: none;
@@ -71,7 +79,8 @@
 .sky-form .radio,
 .sky-form .checkbox,
 .sky-form .toggle,
-.sky-form .button {
+.sky-form .button,
+.sky-form .button2{
     position: relative;
     display: block;
 }
@@ -154,7 +163,22 @@
     border-bottom: 4px solid #404040;
 }
 .sky-form .select-multiple select {
-    height: 55px;
+    display: block;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    height: 62px;
+    padding: 0px 10px;
+    outline: none;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 0;
+    background: #fff;
+    font: 15px/19px 'Open Sans', Helvetica, Arial, sans-serif;
+    color: #404040;
+    appearance: normal;
+    -moz-appearance: none;
+    -webkit-appearance: none;
 }
 
 
@@ -365,7 +389,21 @@
 /* buttons */
 /**/
 .sky-form .button {
-    float: right;
+    float: center;
+    height: 39px;
+    overflow: hidden;
+    margin: 10px 0 0 20px;
+    padding: 0 25px;
+    padding: 0 25px;
+    outline: none;
+    border: 0;
+    font: 300 15px/39px 'Open Sans', Helvetica, Arial, sans-serif;
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+}
+.sky-form .buttonClear {
+    float: center;
     height: 39px;
     overflow: hidden;
     margin: 10px 0 0 20px;
@@ -1572,6 +1610,15 @@
 }
 .sky-form .button {
     background-color: #2da5da;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    -o-transition: opacity 0.2s;
+    -ms-transition: opacity 0.2s;
+    -moz-transition: opacity 0.2s;
+    -webkit-transition: opacity 0.2s;
+}
+.sky-form .button2 {
+    background-color: #525252;
     opacity: 0.8;
     transition: opacity 0.2s;
     -o-transition: opacity 0.2s;

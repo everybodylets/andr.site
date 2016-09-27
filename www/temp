@@ -21,3 +21,92 @@
         #f0fff0;
 
             //    $vall = $(this).parent().find('span[id=num]').val();
+
+<head>
+    <meta charset="utf-8">
+    <title>Факторинг</title>
+    <link rel="icon" type="image/png" href="fav.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+   <link href="sky.css" rel="stylesheet" />
+    <link href="find.css" rel="stylesheet" />
+    <link href="button.css" rel="stylesheet" />
+    <script type="text/javascript" src="myscript.js"></script>
+
+    <script src="jquery-latest.min.js" type="text/javascript"></script>
+    <link href="fotorama.css" type="text/css" rel="stylesheet">
+    <script src="fotorama.js" type="text/javascript"></script>
+</head>
+
+
+    <div class="foto">
+    <div class="fotorama" data-width="15%" data-max-width="15%" data-min-height="20px" data-loop="true" data-fit="cover" data-nav="thumbs">
+        <img src="/dom/files1/154134/file0.jpg" alt="">
+        <img src="/dom/files1/154134/file1.jpg" alt="">
+        <img src="/dom/files1/154134/file2.jpg" alt="">
+        <img src="/dom/files1/154134/file3.jpg" alt="">
+    </div>
+    </div>
+
+        window.onload = function(){
+            aside = document.getElementById("main");
+            aside.innerHTML="<img src='loadingImage.gif'>";
+            if(XMLHttpRequest) var x = new XMLHttpRequest();
+            else var x = new ActiveXObject("Microsoft.XMLHTTP");
+            x.open("GET", "window.php", true);
+            x.send();
+            x.onreadystatechange = function(){
+                if(x.readyState == 4){
+                    if(x.status == 200) aside.innerHTML = x.responseText;
+                    else aside.innerHTML = "Error loading document";
+                }
+            }
+        }
+
+for($ma=159000; $ma<160100; $ma++)
+
+<input type="checkbox" name="check[]" value="'.$raw1['mainnomer'].'" class="sort">
+
+    <!---------------------------------------------- new pagination>
+    <?php
+    /* Входные параметры */
+    $numrow = $pdo->query('SELECT FOUND_ROWS();')->fetch(PDO::FETCH_COLUMN);
+    $count_pages = ceil($numrow/20);
+    $active = $_SESSION["page"];
+    $count_show_pages = 7;
+    $url = "1";
+    $url_page = "?page=";
+    if ($count_pages > 1) { // Всё это только если количество страниц больше 1
+    /* Дальше идёт вычисление первой выводимой страницы и последней (чтобы текущая страница была где-то посредине, если это возможно, и чтобы общая сумма выводимых страниц была равна count_show_pages, либо меньше, если количество страниц недостаточно) */
+    $left = $active - 1;
+    $right = $count_pages - $active;
+    if ($left < floor($count_show_pages / 2)) $start = 1;
+    else $start = $active - floor($count_show_pages / 2);
+    $end = $start + $count_show_pages - 1;
+    if ($end > $count_pages) {
+        $start -= ($end - $count_pages);
+        $end = $count_pages;
+        if ($start < 1) $start = 1;
+    }
+    ?>
+        <!-- Дальше идёт вывод Pagination -->
+           <div id="pagination">
+               <?php if ($active != 1) { ?>
+                   <li class="button"><a href="#" onclick='pag("<?= $url ?>")' title="Первая страница">1...</a></li>
+                   <li class="button"><a href="#" onclick='pag("<?php if ($active == 2) { ?><?= $url ?><?php } else { ?><?= ($active - 1) ?><?php } ?>') "title="Предыдущая страница">Пред.</a></li>
+               <?php } else{ ?><li class="button"><a class="disabled" href="#" onclick='pag("<?= $url ?>"') title="Первая страница">1...</a></li>
+
+            <?php }?>
+            <?php for ($i = $start; $i <= $end; $i++) { ?>
+                <?php if ($i == $active) { ?><span class="current"><?=$i?></span><?php } else { ?><a href="<?php if ($i == 1) { ?><?=$url?><?php } else { ?><?=$url_page.$i?><?php } ?>"><?=$i?></a><?php } ?>
+            <?php } ?>
+            <?php if ($active != $count_pages) { ?>
+            <li class="button"><a href="<?=$url_page.($active + 1)?>" title="Следующая страница">След.</a></li>
+            <li class="button"><a href="<?=$url_page.$count_pages?>" title="Последняя страница">...<?php echo $count_pages ?></a></li>
+            <?php } ?>
+        </div>
+    <?php } ?>
+
+
+       <ul>
+    <nav>
+    <!-- cd-pagination-wrapper -->

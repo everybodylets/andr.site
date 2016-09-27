@@ -1,0 +1,86 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="jquery,ui,easy,easyui,web">
+	<meta name="description" content="easyui help you build your web page easily!">
+	<title>Expand row in DataGrid to show subgrid - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="jquery.easyui.min.js"></script>
+	<script src="datagrid-detailview.js" type="text/javascript"></script>
+</head>
+<body>
+
+
+
+	<h2>Expand row in DataGrid to show subgrid</h2>
+	<div class="demo-info" style="margin-bottom:10px">
+		<div class="demo-tip icon-tip">&nbsp;</div>
+		<div>Click the expand button to expand row and view subgrid.</div>
+	</div>
+	
+	<table id="dg"
+
+		   class="easyui-datagrid"
+		   url='getdata.php'
+		   title="Длинное такое красивое название таблицы"
+		   rownumbers="true" pagination="true"
+		   showFooter="true">
+		<thead>
+			<tr>
+				<th field="id" hidden="true">ID</th>
+				<th field="name" width="10%">Банк</th>
+				<th field="num" width="15%">Номер договора</th>
+				<th field="srocDeb" width="20%">Сроковая</th>
+				<th field="prosrocDeb" width="20%">Просроченая</th>
+				<th field="allDeb" formatter="formatPrice" width="25%">Общая задолженность</th>
+			</tr>
+		</thead>
+	</table>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#dg').datagrid({
+			view: detailview,
+			detailFormatter:function(index,row){
+				return '<div style="padding:1px"><table id="ddv-' + index + '"></table></div>';
+			},
+			onExpandRow: function(index,row){
+				$('#ddv-'+index).datagrid({
+					url:'getdata2.php?itemid='+row.id,
+					fitColumns:true,
+					singleSelect:true,
+					rownumbers:true,
+					loadMsg:'',
+					height:'auto',
+					columns:[[
+						{field:'cid',title:'Quantity',hidden:true,width:100,align:'right'},
+						{field:'codval',title:'Валюта',width:100,align:'right'},
+						{field:'tip',title:'Тип',width:100,align:'right'},
+						{field:'addr',title:'Адрес',width:100,align:'right'},
+						{field:'srocDeb',title:'Сроковая',width:100,align:'right'},
+						{field:'prosrocDeb',title:'Просроченая',width:100,align:'right'},
+						{field:'allDeb',title:'Полная',width:100,align:'right'},
+					]],
+					onResize:function(){
+						$('#dg').datagrid('fixDetailRowHeight',index);
+					},
+					onLoadSuccess:function(){
+						setTimeout(function(){
+							$('#dg').datagrid('fixDetailRowHeight',index);
+						},0);
+					}
+				});
+				$('#dg').datagrid('fixDetailRowHeight',index);
+			}
+		});
+	});
+	function formatPrice(val,row){
+		return val.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+	}
+</script>
+
+</body>
+</html>

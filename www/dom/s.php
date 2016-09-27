@@ -1,5 +1,5 @@
 <?php
-ini_set("max_execution_time", "6000");
+ini_set("max_execution_time", "60000");
 require 'func.php';
 require 'base.php';
 $classstate = "condition-row";
@@ -7,14 +7,17 @@ $classprice = "start-price-row";
 $classdate = "date-end-row";
 $classpay = "payment-row";
 $classname4 = "additional-nformation";
+$classOpis = "Feature-lot";
+$newarr = array(159078,158389,157648,157220,159798,160360,160362,159396,158688,158590,158690,158685,158694,158687,158695,159439);
 
 $stm = $pdo->prepare('INSERT INTO main (title, stan, nomer, dataStart, dataEnd, dataEndZ, priceStart, priceGarant, priceStep, obl, oblMaino, dataPub, Category, Ucenka, Body, URLSetam)
                                 VALUES (:title, :stan, :nomer, :dataStart, :dataEnd, :dataEndZ, :priceStart, :priceGarant, :priceStep, :obl, :oblMaino, :dataPub, :Category, :Ucenka, :Body, :URLSetam)');
-for($ma=159000; $ma<160100; $ma++) {
-
+for($ma=167000; $ma<174513; $ma++) {
+//foreach($newarr as $key){
+$body = "";
 # Use the Curl extension to query Google and get back a page of results
 
-    $url1 = "setam.net.ua/auction/".$ma;
+    $url1 = "https://setam.net.ua/auction/".$ma;
     $ch1 = curl_init();
     curl_setopt($ch1, CURLOPT_URL, $url1);
     curl_setopt($ch1, CURLOPT_RETURNTRANSFER, 1);
@@ -40,8 +43,6 @@ for($ma=159000; $ma<160100; $ma++) {
     }else
 
         $mtitle = $xpath1->query("//title");
-
-
         $results = $xpath1->query("//div[@class='" . $classstate . "']/span|
                                 //div[@class='" . $classdate . "']/span|
                                 //div[@class='" . $classprice . "']/span/span|
@@ -49,7 +50,7 @@ for($ma=159000; $ma<160100; $ma++) {
         $results1 = $xpath1->query("//div[@id='" . $classname4 . "']/text()");
         $results3 = $xpath1->query("//div[@id='" . $classname4 . "']/a/@href");
         $resultsPay = $xpath1->query("//div[@class='" . $classpay . "']/span/span");
-        $resultsOpis = $xpath1->query("//div[@id='Feature-lot']/p");
+        $resultsOpis = $xpath1->query("//div[@id='" . $classOpis . "']/p");
         $photo = $xpath1->query("//div[@class='fotorama']/img");
         $stana = stan($results->item(0)->nodeValue);
         if (!$stana){continue;}
@@ -94,6 +95,7 @@ for($ma=159000; $ma<160100; $ma++) {
             $stm->bindParam(":Ucenka", $ycen);
             $categ = cat(trim($results1->item(3)->nodeValue));
             $stm->bindParam(":Category", $categ);
+            echo $ycen;
         } else {
             $ycen = "NO";
             $stm->bindParam(":Ucenka", $ycen);
@@ -101,22 +103,24 @@ for($ma=159000; $ma<160100; $ma++) {
             $stm->bindParam(":Category", $categ);
         }
     // Проверка на стан аукциона и на правильные категории.
-    if(($stana == "102" || $stana == "108")&&($categ=="9"||$categ=="10"||$categ=="11"||$categ=="12"||$categ=="13"||$categ=="14"||$categ=="15")) {
-
+    if(($stana == "102" || $stana == "108")&&($categ == "55"||$categ == "9"||$categ=="10"||$categ=="11"||$categ=="12"||$categ=="13"||$categ=="14"||$categ=="15")) {
         if($photo->length) {
-    mkdir('files1/'.$nom, 0777);
-    for ($t = 0; $t < $photo->length; $t++) {
-        $url = 'http://setam.net.ua' . $photo->item($t)->getAttribute('src');
-        $local = 'files1/'.$nom . '/file' . $t . '.jpg';
-        file_put_contents($local, file_get_contents($url));}
-    }
-        for ($o = 0; $o < $resultsOpis->length; $o++) {
-            $body .= trim($resultsOpis->item($o)->nodeValue) . "<br />";}
+            mkdir('photo/'.$nom, 0777);
+            for ($t = 0; $t < $photo->length; $t++) {
+            $url = 'https://setam.net.ua' . $photo->item($t)->getAttribute('src');
+            $local = 'photo/'.$nom . '/file' . $t . '.jpg';
+            file_put_contents($local, file_get_contents($url));
+            }
+        }
+            for ($o = 0; $o < $resultsOpis->length; $o++) {
+            $body .= trim($resultsOpis->item($o)->nodeValue) . "<br />";
+            };
         $stm->bindParam(":Body", $body);
         $stm->bindParam(":URLSetam", $url1);
-
-            $stm->execute();
-        }
+        $stm->execute();
+        echo $nom."<br />";
     }
+    }
+echo $ma;
 ?>
 

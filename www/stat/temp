@@ -1,0 +1,18 @@
+            onExpandRow: function(index,row){
+                $('#ddv-'+index).datagrid({
+                   // url:'getdata2.php?itemid='+row.id,
+                    href: 'show_form.php',
+                    fitColumns:true,
+                    singleSelect:true,
+                    rownumbers:true,
+                    loadMsg:'',
+                    height:'auto',
+                    columns:[[
+                        {field:'cid',title:'№',width:20},
+                        {field:'codval',title:'Валюта',width:100,align:'right'},
+                        {field:'tip',title:'Тип',width:100,align:'right'},
+                        {field:'addr',title:'Адрес',width:100,align:'right'},
+                        {field:'srocDeb',title:'Сроковая',width:100,align:'right'},
+                        {field:'prosrocDeb',title:'Просроченная',width:100,align:'right'},
+                        {field:'allDeb',title:'Общая',width:100,align:'right'}
+                    ]],

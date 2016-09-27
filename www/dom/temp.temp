@@ -1,3 +1,9 @@
+https://setam.net.ua/auction/159078
+https://setam.net.ua/auction/158389
+https://setam.net.ua/auction/157648
+
+
+
     for ($ii = 0; $ii <= $results1->length; $ii++) {
         $res = $results1->item(1)->textContent;
         if($res == "Сторінка не знайдена"):
@@ -57,3 +63,39 @@
                 </section>
             </div>
         </fieldset>
+
+
+<script type="text/javascript">
+		$(function(){
+			$('#dg').datagrid({
+				view: detailview,
+				detailFormatter:function(index,row){
+					return '<div style="padding:2px"><table id="ddv-' + index + '"></table></div>';
+				},
+				onExpandRow: function(index,row){
+					$('#ddv-'+index).datagrid({
+						url:'datagrid22_getdetail.php?itemid='+row.itemid,
+						fitColumns:true,
+						singleSelect:true,
+						rownumbers:true,
+						loadMsg:'',
+						height:'auto',
+						columns:[[
+							{field:'id',title:'Order ID',width:200},
+							{field:'name',title:'Quantity',width:100,align:'right'},
+							{field:'url',title:'Unit Price',width:100,align:'right'}
+						]],
+						onResize:function(){
+							$('#dg').datagrid('fixDetailRowHeight',index);
+						},
+						onLoadSuccess:function(){
+							setTimeout(function(){
+								$('#dg').datagrid('fixDetailRowHeight',index);
+							},0);
+						}
+					});
+					$('#dg').datagrid('fixDetailRowHeight',index);
+				}
+			});
+		});
+	</script>
