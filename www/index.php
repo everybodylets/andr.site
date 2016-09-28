@@ -11,16 +11,10 @@ require'dom/base.php';
     <link href="sky.css" rel="stylesheet" />
     <link href="find.css" rel="stylesheet" />
     <link href="button.css" rel="stylesheet" />
-    <!-- Add jQuery library -->
     <script type="text/javascript" src="jquery-latest.min.js"></script>
     <script type="text/javascript" src="myscript.js"></script>
     <link href="fotorama.css" type="text/css" rel="stylesheet">
     <script src="fotorama.js" type="text/javascript"></script>
-
-    <!-- Add fancyBox -->
-    <link rel="stylesheet" href="fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
-    <script type="text/javascript" src="fancybox/source/jquery.fancybox.pack.js"></script>
-
 
     <link rel="stylesheet" href="pagination/css/reset.css"> <!-- CSS reset -->
     <link rel="stylesheet" href="pagination/css/style.css"> <!-- Resource style -->
@@ -38,7 +32,7 @@ require'dom/base.php';
             <li class="m"><a href="/stat" title="Кредитные портфели банков ФГВФО"><i class="fa fa-list-ol" aria-hidden="true"> Кредиты </i></a></li>
             <li class="m"><a href="/stat1" title="Графики распределения кредитных портфелей ФГВФО"><i class="fa fa-pie-chart" aria-hidden="true"> Графики </i></a></li>
         </ul>
-        <a href="#" class="sideTrigger">   </a>
+        <a href="#" class="sideTrigger"><img class="sideTriggerImg" src="menu11.png"></a>
     </div>
     <div class="sub-head" align="center">
         <i class="fa fa-paperclip" aria-hidden="true"></i> Сводный реестр продаж ФГВФО
@@ -162,19 +156,17 @@ require'dom/base.php';
 //        $('#fotorama').fotorama();
     });
     function llo(res, pagi) {
-        $('.loading').fadeIn(10);
         $('#main').load('mailform.php?echo='+res+'&pagi='+pagi, function() {
-            $('.loading').fadeOut(30);
+            $('html, body').animate({scrollTop: 0}, 500);
             $('.fotorama').fotorama();
         });
 
     };
 
     function pag(res) {
-        $('.loading').fadeIn(10);
         var formData = $('.sky-form').serializeArray();
         $('#main').load('window.php?page='+res, formData, function() {
-            $('.loading').fadeOut(30);
+            $('html, body').animate({scrollTop: $('#anchor').offset().top}, 500);
         });
     };
     // Side Menu Trigger Function

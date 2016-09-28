@@ -8,7 +8,6 @@ else{
 $limittext = "LIMIT 0, 20";
 $page = 1;
 }
-//echo $limittext . "<br />";
 if(!empty($_POST)){
     if(isset($_POST['obl'])) {
     $getobl = implode(",", $_POST['obl']);
@@ -27,7 +26,7 @@ if(!empty($_POST)){
     }
     if(isset($_POST['find']) && !empty($_POST['find'])){
     $getfind = $_POST['find'];
-    $querytext .= " main.title LIKE '%".$getfind."%' OR main.nomer LIKE '%".$getfind."%' AND";
+    $querytext .= " (main.title LIKE '%".$getfind."%'  OR main.nomer LIKE '%".$getfind."%') AND";
     }
     if(isset($_POST['ot']) && !empty($_POST['ot'])){
         $getot = $_POST['ot'];
@@ -38,14 +37,13 @@ if(!empty($_POST)){
         $querytext .= " main.priceStart <= ".$getdo." AND";
     }
 }
-$result = $pdo->query('SELECT SQL_CALC_FOUND_ROWS main.id, CAST(main.nomer AS CHAR(10)) AS mainnomer, main.title, main.dataStart,
+$result = $pdo->query('SELECT SQL_CALC_FOUND_ROWS main.id, main.nomer, main.title, main.dataStart,
 main.dataEnd, main.priceStart, main.priceGarant, main.priceStep, stan.name, obl.name AS oblname
 FROM main, stan, obl WHERE '.$querytext.' main.stan=stan.id AND main.obl=obl.id
-ORDER BY main.dataStart DESC '.$limittext.' ');
+ORDER BY dataStart DESC, nomer '.$limittext.' ');
 $numrow = $pdo->query('SELECT FOUND_ROWS();')->fetch(PDO::FETCH_COLUMN);
 $count_pages = ceil($numrow/20);
-//print_r($_POST);
-//echo $querytext;
+
 ?>
 
 <div class="sub-page">Страница <? echo $page; ?> из <? echo $count_pages; ?></div>
@@ -59,21 +57,19 @@ $count_pages = ceil($numrow/20);
 <div class="clear"></div>
     <?php
     foreach($result as $raw1){
-        $nomm = $raw1['mainnomer'];
+        $nomm = $raw1['nomer'];
         $cena = number_format($raw1["priceStart"], 2, ",", " ");
-        echo '
+        echo '<div class="sh" id="'.$nomm.'"><span class="inner" id="num">'.$raw1["nomer"].' <br /></span>';
 
-        <div class="sh">
-                    <span class="inner" id="num">'.$raw1["mainnomer"].' <br /></span>';
-        echo'<span class="inner" id="subj"><p><a href="?echo='.$raw1["mainnomer"].'">'.$raw1["title"].'</a></p></span>
+        echo'<span class="inner" id="subj"><p><a href="javascript:void(0)" id="echo" onClick="llo('.$nomm.','.$page.')">'.$raw1["title"].'</a></p></span>
                     <span class="inner" id="date"><p><b>'.$raw1["name"].'</b><br />Область: <b>'.$raw1["oblname"].'</b><br />Начало торгов: <b>'. substr($raw1["dataStart"],0, 10).'</b> <br /> Окончание торгов: <b>'. substr($raw1["dataEnd"],0, 10).'</b> </p></span>
                     <span class="inner" id="cost" ><p>Начальная цена: <br /><b>'.number_format($raw1["priceStart"], 2, ",", " ").' грн </b><br />Гарантийный платеж: <br /><b>'.number_format($raw1["priceGarant"], 2, ",", " ").' грн</b></p></span>
-                    <span class="inner" id="photo" ><a href="#" id="echo" onClick="llo('.$nomm.' , '.$page.')"><img src="/dom/photo/'.$nomm.'/file0.jpg" style="width:100px; height:100px"></a></span>
+                    <span class="inner" id="photo" ><a href="javascript:void(0)" id="echo" onClick="llo('.$nomm.','.$page.')"><img src="/dom/photo/'.$nomm.'/file0.jpg" style="width:100px; height:100px"></a></span>
         </div>
                     <div class="clear"></div>'
         ;}?>
     <div class="sky-form-padd">
-        <button type="submit" class="button">Выбрать</button>
+        <button type="submit" class="button" id="anchor">Выбрать</button>
     </div>
 <?php
     /* Входные параметры */
@@ -100,17 +96,17 @@ $count_pages = ceil($numrow/20);
         <!-- Дальше идёт вывод Pagination -->
            <div id="pagination">
                <?php if ($active != 1) { ?>
-                   <li class="button"><a href="#" onclick='pag(<?= $url ?>)' title="Первая страница">1...</a></li>
-                   <li class="button"><a href="#" onclick='pag(<?php if ($active == 2) { ?><?= $url ?><?php } else { ?><?= ($active - 1) ?><?php } ?>)' "title="Предыдущая страница">Пред.</a></li>
-               <?php } else{ ?><li class="button"><a class="disabled" href="#" onclick='pag(<?= $url ?>)' title="Первая страница">1...</a></li>
+                   <li class="button"><a href="javascript:void(0)" onclick='pag(<?= $url ?>)' title="Первая страница">1...</a></li>
+                   <li class="button"><a href="javascript:void(0)" onclick='pag(<?php if ($active == 2) { ?><?= $url ?><?php } else { ?><?= ($active - 1) ?><?php } ?>)' "title="Предыдущая страница">Пред.</a></li>
+               <?php } else{ ?><li class="button"><a class="disabled" href="javascript:void(0)" onclick='pag(<?= $url ?>)' title="Первая страница">1...</a></li>
 
             <?php }?>
             <?php for ($i = $start; $i <= $end; $i++) { ?>
-                <?php if ($i == $active) { ?><span class="current"><?=$i?></span><?php } else { ?><a href="#" onclick='pag(<?php if ($i == 1) { ?><?=$url?><?php } else { ?><?=$i?><?php } ?>)'><?=$i?></a><?php } ?>
+                <?php if ($i == $active) { ?><span class="current"><?=$i?></span><?php } else { ?><a href="javascript:void(0)" onclick='pag(<?php if ($i == 1) { ?><?=$url?><?php } else { ?><?=$i?><?php } ?>)'><?=$i?></a><?php } ?>
             <?php } ?>
             <?php if ($active != $count_pages) { ?>
-            <li class="button"><a href="#" onclick='pag(<?=($active + 1)?>)' title="Следующая страница">След.</a></li>
-            <li class="button"><a href="#" onclick='pag(<?=$count_pages?>)' title="Последняя страница">...<?php echo $count_pages ?></a></li>
+            <li class="button"><a href="javascript:void(0)" onclick='pag(<?=($active + 1)?>)' title="Следующая страница">След.</a></li>
+            <li class="button"><a href="javascript:void(0)" onclick='pag(<?=$count_pages?>)' title="Последняя страница">...<?php echo $count_pages ?></a></li>
             <?php } ?>
         </div>
         <?php } ?>

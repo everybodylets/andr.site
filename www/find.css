@@ -170,7 +170,14 @@
 
 .sideTrigger {
     float: left;
-    padding: 30px;
+    padding-top: 75px;
+}
+.sideTriggerImg{
+    position: fixed;
+    opacity: 0.8;
+    z-index: 1000;
+    width: 35px;
+    height: 50px;
 }
 
 

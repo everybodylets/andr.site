@@ -2,7 +2,7 @@
 //session_start();
 require 'dom/base.php';
 $echonumber = $_GET['echo'];
-$sth = $pdo->prepare("SELECT main.id, main.nomer, main.title, main.dataStart, main.dataEnd, main.priceStart, main.priceGarant, main.priceStep, stan.name, main.Body, obl.name AS oblname, main.Category, category.name as cat FROM main, stan, obl, category WHERE main.nomer=".$echonumber." AND main.stan=stan.id AND main.obl=obl.id AND main.Category=Category.id");
+$sth = $pdo->prepare("SELECT main.id, main.nomer, main.title, main.dataStart, main.dataEnd, main.priceStart, main.priceGarant, main.priceStep, stan.name, main.Body, obl.name AS oblname, main.Category, category.name as cat FROM main, stan, obl, category WHERE main.nomer=".$echonumber." AND main.stan=stan.id AND main.obl=obl.id AND main.Category=category.id");
 $sth->execute();
 $result = $sth->fetch(PDO::FETCH_ASSOC);
 
@@ -15,7 +15,7 @@ $page = $_GET['pagi'];
 ?>
 
 <div class="case-w">
-    <a href="#" onclick="pag(<? echo $page; ?>)">
+    <a href="javascript:void(0)" onclick="pag(<? echo $page.','.$echonumber; ?>)">
     <span class="inner_case"><p>К списку</p></span></a>
     <span class="case" ><p>Лот №<? echo $echonumber; ?></p></span>
     <div class="clear"></div>
@@ -46,10 +46,3 @@ $page = $_GET['pagi'];
         </ul>
 
 </div>
-
-<!--<script type="text/javascript">-->
-<!--    $(function() {-->
-<!--        $('#fotorama').fotorama();-->
-<!--    });-->
-<!---->
-<!--</script>-->
