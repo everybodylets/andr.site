@@ -23,16 +23,19 @@ require'dom/base.php';
 </head>
 
 <body>
-
-<div class="loading"></div>
+<ul class="reg">
+    <li class="reg"><a id="myBtn" onclick="reg()">Вход</a></li>
+</ul class="reg">
+<div class="clear_r"></div>
 <header>
     <div class="head" align="center">
+
         <ul class="m">
             <li class="m"><a class="activetab" href="/" title="Сводный реестр продаж ФГВФО"><i class="fa fa-paperclip"> Торги </i></a></li>
             <li class="m"><a href="/stat" title="Кредитные портфели банков ФГВФО"><i class="fa fa-list-ol" aria-hidden="true"> Кредиты </i></a></li>
             <li class="m"><a href="/stat1" title="Графики распределения кредитных портфелей ФГВФО"><i class="fa fa-pie-chart" aria-hidden="true"> Графики </i></a></li>
         </ul>
-        <a href="#" class="sideTrigger"><img class="sideTriggerImg" src="menu11.png"></a>
+        <a href="#" class="sideTrigger"><img class="sideTriggerImg" src="menu11.png" /></a>
     </div>
     <div class="sub-head" align="center">
         <i class="fa fa-paperclip" aria-hidden="true"></i> Сводный реестр продаж ФГВФО
@@ -150,6 +153,8 @@ require'dom/base.php';
 </div>
 
 </body>
+<div id="openModal" class="modalDialog"></div>
+
 <script type="text/javascript">
     $(function() {
         $('#main').load('window.php');
@@ -180,6 +185,24 @@ require'dom/base.php';
         $('body').removeClass('sideOpen');
         return false;
     });
+
+    var modal = document.getElementById('openModal');
+    function reg(res) {
+        $('#openModal').show();
+        if(res=="reg"){
+            $('#openModal').load('reg.php');
+        } else {
+            $('#openModal').load('enter.php');
+        }
+    }
+    function cl(){
+        $('#openModal').hide();
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 
 </script>
 

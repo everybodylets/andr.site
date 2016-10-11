@@ -2,10 +2,10 @@
 //session_start();
 require "dom/base.php";
 if(isset($_GET['page'])){
-$limittext = "LIMIT ".(($_GET['page']-1)*20).", 20";
+$limittext = "LIMIT ".(($_GET['page']-1)*10).", 10";
 $page = $_GET['page'];}
 else{
-$limittext = "LIMIT 0, 20";
+$limittext = "LIMIT 0, 10";
 $page = 1;
 }
 if(!empty($_POST)){

@@ -28,30 +28,21 @@
 .inner_case{
     float: left;
     width: 15%;
-    height: 80px;
+    height: 40px;
     padding-left: 5px;
-    background: #6fb679;
-    background-image: url("arrow-left.png");
-    background-size: contain;
-    /*background-position: center;*/
-    background-repeat: no-repeat;
-
 }
-.inner_case p{
-    font-style: oblique;
-    font-weight: bold;
- /*   font-size: large; */
-    color: #ffffff;
-    text-align:right;
-    top: 20px;
-    margin-top: 25px;
-
+.inner_byu{
+    float: right;
+    width: 15%;
+    height: 40px;
+    padding-left: 5px;
 }
+
 .case p{
     font-style: oblique;
     font-weight: bold;
     font-size: large;
-    color: #6fb679;
+    /*color: #ffffff;*/
     text-align:center;
     top: 20px;
     margin-top: 25px;
@@ -62,19 +53,25 @@
     margin: 15px;
     border: solid black 5px;
     width: 30%;
-    height: auto;
+    /*height: 30%;*/
+}
+.spisok{
+    float: left;
+    width: 50%;
 }
 .case-w{
     background: rgb(172, 226, 255);
-    border: 3px solid rgba(82, 82, 82, 0.75);
+    /*border: 3px solid rgba(82, 82, 82, 0.75);*/
     float: left;
     margin-left: 10px;
     margin-bottom: 10px;
     width: 98%;
     box-shadow: 0 0 20px rgba(0,10,0,.3);
     font: 13px/1.55 'Open Sans', Helvetica, Arial, sans-serif;
-    color: #666;
+    /*color: #666;*/
+    height: auto;
 }
+
 
 .data{
     float: left;
@@ -84,7 +81,7 @@
 }
 .llist{
     /*float: left;*/
-    font: 19px/1.55 'Open Sans', Helvetica, Arial, sans-serif;
+    font: 12px/1.55 'Open Sans', Helvetica, Arial, sans-serif;
     margin-top: 10px;
 
 }
@@ -106,6 +103,9 @@
 
 .clear {
     clear: left; /* Отмена обтекания */
+}
+.clear_r{
+    clear: right;
 }
 .sh{
     background: rgb(172, 226, 255);
@@ -168,6 +168,7 @@
     /*box-shadow: 0 0 20px 0 #ccc;*/
 }
 
+
 .sideTrigger {
     float: left;
     padding-top: 75px;
@@ -178,9 +179,8 @@
     z-index: 1000;
     width: 35px;
     height: 50px;
+    align: bottom;
 }
-
-
 .sh p{
     display: inline-block;
     /*vertical-align: middle;*/
@@ -202,16 +202,16 @@
 }
 .sub-page{
     background: rgb(240, 255, 240);
-    height: 8%;
+    /*height: 8%;*/
     font: 15px/1.55 'Roboto', Helvetica, Arial, sans-serif;
     color: #0d560d;
-    margin-left: 30;
+    margin-left: 30px;
 }
 
 
 .head p{position: relative; top: 30%; left: 20%;}
 .main{
-    width: 79.5%;
+    width: 95%;
     float: left;
     margin-bottom:50px;
     position: relative;
@@ -226,26 +226,12 @@
     -o-transform: translateZ(0);
     transform: translateZ(0);
 }
-.loading {
-    display: none;
-    position: fixed;
-    z-index: 9998;
-    width: 100%;
-    height: 100%;
-    background: #000000;
-    opacity: 0.7;
-    filter: alpha(opacity=30);
-    left:0;
-    top:0;
-}
-
-/*.bd{}*/
 
 BODY {
     background: rgb(240, 255, 240);
     overflow-x: hidden;
     position: relative;
-    height: 100%;
+    height: 100%;}
 
 A {
     text-decoration: none;
@@ -268,7 +254,7 @@ A:active {
     color: #0d560d; /* Цвет активных ссылок */
 }
 
-}
+
 
 span
 {
@@ -341,6 +327,25 @@ ul .m {
 li .m {
     float: left;
 }
+ul .reg {
+    float: right;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(240, 255, 240);
+}
+.reg a{
+    display: block;
+    color: green;
+    text-align: center;
+    padding: 0 5 0 5;
+    text-decoration: none;
+}
+
+li .reg {
+    float: left;
+}
 
 .m a {
     display: block;
@@ -357,4 +362,43 @@ li .m {
 .activetab i {
     color: #f36301;
     border-bottom: solid;
+}
+
+.modalDialog {
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    display: none;
+    /*pointer-events: none;*/
+}
+
+/*.modalDialog:target {*/
+    /*display: block;*/
+    /*pointer-events: auto;*/
+/*}*/
+
+.modalDialog > div {
+    width: 400px;
+    position: relative;
+    margin: 10% auto;
+    padding: 5px 20px 13px 20px;
+    /*border-radius: 10px;*/
+    background: #fff;
+    /*background: -moz-linear-gradient(#fff, #6fb679);*/
+    /*background: -webkit-linear-gradient(#fff, #6fb679);*/
+    /*background: -o-linear-gradient(#fff, #6fb679);*/
+}
+#cl:hover,
+#cl:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

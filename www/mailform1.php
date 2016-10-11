@@ -1,4 +1,13 @@
+<meta charset="utf-8">
+<link href="sky.css" rel="stylesheet" />
+<link href="find.css" rel="stylesheet" />
+<link href="button.css" rel="stylesheet" />
+<script type="text/javascript" src="jquery-latest.min.js"></script>
+<script type="text/javascript" src="myscript.js"></script>
+<link href="fotorama.css" type="text/css" rel="stylesheet">
+<script src="fotorama.js" type="text/javascript"></script>
 <?
+//session_start();
 require 'dom/base.php';
 $echonumber = $_GET['echo'];
 $sth = $pdo->prepare("SELECT main.id, main.nomer, main.title, main.dataStart, main.dataEnd, main.priceStart, main.priceGarant, main.priceStep, stan.name, main.Body, obl.name AS oblname, main.Category, category.name as cat FROM main, stan, obl, category WHERE main.nomer=".$echonumber." AND main.stan=stan.id AND main.obl=obl.id AND main.Category=category.id");
@@ -14,20 +23,12 @@ $page = $_GET['pagi'];
 ?>
 
 <div class="case-w">
-    <div class="inner_case"><a href="javascript:void(0)" onclick="pag(<? echo $page.','.$echonumber; ?>)">
-    <i class="fa fa-reply fa-2x" aria-hidden="true" style="color: #0d560d; margin-top: 5px"> Список</i></a></div>
-
+    <a href="javascript:void(0)" onclick="pag(<? echo $page.','.$echonumber; ?>)">
+        <span class="inner_case"><p>К списку</p></span></a>
     <span class="case" ><p>Лот №<? echo $echonumber; ?></p></span>
-
-    <div class="inner_byu">
-        <a href="javascript:void(0)" onclick="pag(<? echo $page.','.$echonumber; ?>)">
-    <i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true" style="color: #0d560d"> Купить </i>
-    </a>
-    </div>
-
     <div class="clear"></div>
     <div class="foto">
-        <div class="fotorama" data-max-width="100%" data-min-height="20px" data-loop="true" data-fit="cover" data-nav="thumbs">
+        <div class="fotorama" data-width="100%" data-max-width="100%" data-min-height="20px" data-loop="true" data-fit="cover" data-nav="thumbs">
             <?
             foreach($files as $pic){
                 echo '<img src="/dom/photo/'.$echonumber.'/'.$pic.'">';
@@ -54,6 +55,11 @@ $page = $_GET['pagi'];
     </ul>
     <div class="clear"></div>
     <span class="llist"><h3>Описание: </h3><?php echo $result['Body'] ?></span>
-    <div class="clear"></div>
 
 </div>
+<script type="text/javascript">
+    $(function() {
+//        $('#main').load('window.php');
+        $('#fotorama').fotorama();
+    });
+</script>
