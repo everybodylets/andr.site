@@ -1,5 +1,5 @@
 <?
-//session_start();
+session_start();
 require "dom/base.php";
 if(isset($_GET['page'])){
 $limittext = "LIMIT ".(($_GET['page']-1)*10).", 10";

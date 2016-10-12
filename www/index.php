@@ -1,5 +1,5 @@
 <?
-//session_start();
+session_start();
 require'dom/base.php';
 ?>
 
@@ -23,9 +23,17 @@ require'dom/base.php';
 </head>
 
 <body>
+
+
 <ul class="reg">
-    <li class="reg"><a id="myBtn" onclick="reg()">Вход</a></li>
-</ul class="reg">
+    <? if(isset($_SESSION['login_user'])){
+    echo '<li class="reg"><a onclick="exit()">Выход</a></li><li class="reg"><a onclick="sett()">Профиль</a></li><li class="reg">Вы вошли как '.$_SESSION["name_user"].'</li>';}
+    else {
+    echo  '<li class="reg"><a id = "myBtn" onclick = "reg(\'butt\')"> Войти</a></li>';
+    }
+    ?>
+</ul>
+
 <div class="clear_r"></div>
 <header>
     <div class="head" align="center">
@@ -47,7 +55,7 @@ require'dom/base.php';
 <div id="content" style="position: relative;">
 
     <div class="menu">
-        <form class="sky-form">
+        <form class="sky-form" id="main-sky-form">
             <header>Поиск</header>
 
             <fieldset>
@@ -169,7 +177,7 @@ require'dom/base.php';
     };
 
     function pag(res) {
-        var formData = $('.sky-form').serializeArray();
+        var formData = $('#main-sky-form').serializeArray();
         $('#main').load('window.php?page='+res, formData, function() {
             $('html, body').animate({scrollTop: $('#anchor').offset().top}, 500);
         });
@@ -187,21 +195,35 @@ require'dom/base.php';
     });
 
     var modal = document.getElementById('openModal');
+
     function reg(res) {
         $('#openModal').show();
-        if(res=="reg"){
+        if(res=="change"){
             $('#openModal').load('reg.php');
-        } else {
+        }
+        if(res=="enter"){
+            var formData1 = $('.sky-form').serializeArray();
+            $('#openModal').load('enter.php', formData1);
+        }
+        if(res=="register"){
+            var formData2 = $('.sky-form').serializeArray();
+            $('#openModal').load('reg.php', formData2);
+        }
+        if(res=="butt"){
             $('#openModal').load('enter.php');
         }
     }
     function cl(){
         $('#openModal').hide();
+        location.reload();
     }
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
+    }
+    function exit(){
+        window.location="signout.php";
     }
 
 </script>

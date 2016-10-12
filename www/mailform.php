@@ -1,4 +1,6 @@
 <?
+session_start();
+
 require 'dom/base.php';
 $echonumber = $_GET['echo'];
 $sth = $pdo->prepare("SELECT main.id, main.nomer, main.title, main.dataStart, main.dataEnd, main.priceStart, main.priceGarant, main.priceStep, stan.name, main.Body, obl.name AS oblname, main.Category, category.name as cat FROM main, stan, obl, category WHERE main.nomer=".$echonumber." AND main.stan=stan.id AND main.obl=obl.id AND main.Category=category.id");
